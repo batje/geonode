@@ -4,16 +4,29 @@ Using Time based data in Geonode
 ==================
 
 This section will help you to configure Geonode in a way that allows you to upload layers that have a time axis. For example weather information.
-This section will guide you through the steps necessary to install GeoNode. Basically there are three different ways for you to install GeoNode. Depending on your purpose, you can choose between those. If you just want to test Geonode or just want a completely configured GeoNode, then try the :ref:`quick_installation`. If you intend to use Geonode with some already installed components, then use the :ref:`complete_install` guide. This installation will give you full control over the components and you will be able to configure the components the way you need them. If you instead want to do some development, use the :ref:`install_devmode` guide.
 
-:ref:`quick_installation`
-  How to install GeoNode using PPA repositories.
+In order to be able to upload time-based data, you need to change 2 parameters in your local_settings.py
 
-:ref:`complete_install`
-  How to install GeoNode manually.
+1. First, you need to tell geonode that Geoserver support a protocol called WMST. You do this by changing the WMST_ENABLED flag in the default OGC_SERVER array to True
 
-:ref:`install_devmode`
-  How to install GeoNode for development (for Developers) and prepare your development environment.
+  OGC_SERVER = {
+    'default' : {
+      'WMST_ENABLED' : False,
+      
+You can read more about WMS Time on the Geoserver website: http://docs.geoserver.org/latest/en/user/services/wms/time.html
+
+2. Secondly, you have to use the more modern, but slightly less tested uploader called geoserver.importer and allow this importer be Time enabled. Below the OGC-SERVER array, add the UPLOADER array:
+
+# Uploader Settings
+  UPLOADER = {
+    'BACKEND' : 'geoserver.importer',
+    'OPTIONS' : {
+        'TIME_ENABLED': True,
+        'GEOGIT_ENABLED': False,
+    }
+  }
+
+See: https://github.com/GeoNode/geonode/blob/master/geonode/settings.py#L427
 
 
 Other install links:
@@ -21,6 +34,4 @@ Other install links:
 .. toctree::
    :maxdepth: 1
 
-   install_postgresql
-   install_postgis
-
+   
