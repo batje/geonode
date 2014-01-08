@@ -15,6 +15,9 @@ In order to be able to upload time-based data, you need to change 2 parameters i
       
 You can read more about WMS Time on the Geoserver website: http://docs.geoserver.org/latest/en/user/services/wms/time.html
 
+
+
+
 2. Secondly, you have to use the more modern, but slightly less tested uploader called geoserver.importer and allow this importer be Time enabled. Below the OGC-SERVER array, add the UPLOADER array:
 
 # Uploader Settings
@@ -27,6 +30,20 @@ You can read more about WMS Time on the Geoserver website: http://docs.geoserver
   }
 
 See: https://github.com/GeoNode/geonode/blob/master/geonode/settings.py#L427
+
+
+You are now ready to upload data. But first we need to prepare the data itself.
+
+Data can have a start and an end column, if the data is periodic. The effect in geonode of this data is XXX
+
+If data only has a start-date, the effect will be xxxx
+
+
+The data format is explained in code here: 
+https://github.com/GeoNode/geonode/blob/master/geonode/upload/templates/upload/layer_upload_time.html#L185
+
+The geoserver time page also has info about the date format of your columns. 
+
 
 
 Other install links:
