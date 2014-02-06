@@ -78,7 +78,8 @@ CATALOGUE = {
     }
 }
 
-# A Google Maps API key is needed for the 3D Google Earth view of maps
+# You may create a Google Maps API key for the 3D Google Earth view of maps
+# It might help you collect statistics about the use of this feature.
 # See http://code.google.com/apis/maps/signup.html
 GOOGLE_API_KEY = ''
 
